@@ -6,7 +6,7 @@ schemes:
 produces: 
   - "application/json"
 info: 
-  version: "3.0.2"
+  version: "3.0.2-0013"
   title: "Boodskap API"
   description: "Boodskap IoT Platform API"
   termsOfService: "https://boodskap.io/terms-conditions"
@@ -18977,6 +18977,39 @@ paths:
           description: "Error"
           schema: 
             $ref: "#/definitions/ApiError"
+  '/org/user/get/{atoken}/{orgId}/{userId}':
+    get:
+      tags:
+        - Organization
+      summary: Get Organization User
+      operationId: getOrganizationUser
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          required: true
+          type: string
+        - name: orgId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: userId
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Success"
+          schema: 
+            $ref: "#/definitions/User"
+        "417":
+          description: "Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
   '/org/user/list/{atoken}/{orgId}/{pageSize}':
     get:
       tags:
@@ -19124,6 +19157,43 @@ paths:
           description: "Success"
           schema: 
             $ref: "#/definitions/Success"
+        "417":
+          description: "Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/org/user/role/get/{atoken}/{orgId}/{userId}/{roleId}':
+    get:
+      tags:
+        - Organization
+      summary: Get Organization User Role
+      operationId: getOrganizationUserRole
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          required: true
+          type: string
+        - name: orgId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: userId
+          in: path
+          required: true
+          type: string
+        - name: roleId
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Success"
+          schema: 
+            $ref: "#/definitions/OrganizationRole"
         "417":
           description: "Error"
           schema: 
@@ -22123,8 +22193,6 @@ definitions:
       records:
         type: integer
         format: int64
-      version:
-        type: string
       pendingMessages:
         type: integer
       pendingLogs:
@@ -22137,6 +22205,8 @@ definitions:
         type: integer
       pendingVoice:
         type: integer
+      version:
+        type: string
   DomainCounter:
     allOf:
     - $ref: '#/definitions/Counter'
@@ -23981,9 +24051,6 @@ definitions:
       required:
        - 'userId'
       properties:
-        orgId:
-          type: integer
-          format: int64
         userId:
           type: string
   OrganizationProperty:
