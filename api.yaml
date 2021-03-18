@@ -6,7 +6,7 @@ schemes:
 produces: 
   - "application/json"
 info: 
-  version: "3.0.2-0018"
+  version: "4.0.0-0002"
   title: "Boodskap API"
   description: "Boodskap IoT Platform API"
   termsOfService: "https://boodskap.io/terms-conditions"
@@ -20238,6 +20238,338 @@ paths:
           description: "API Error"
           schema: 
             $ref: "#/definitions/ApiError"
+  '/process/upsert/{atoken}':
+    post:
+      tags:
+        - Process
+      summary: Create / Update Process
+      operationId: upsertProcess
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+        - name: entity
+          in: body
+          description: Process JSON object
+          required: true
+          schema:
+            $ref: '#/definitions/Process'
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/process/get/{atoken}/{id}':
+    get:
+      tags:
+        - Process
+      summary: Retreive Process
+      operationId: getProcess
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Process ID
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Process'
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/process/delete/{atoken}/{id}':
+    delete:
+      tags:
+        - Process
+      summary: Delete Process
+      operationId: deleteProcess
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Process ID
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/process/delete/all/{atoken}':
+    delete:
+      tags:
+        - Process
+      summary: Delete All Processes
+      operationId: deleteAllProcesses
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/process/count/{atoken}':
+    post:
+      tags:
+        - Process
+      summary: Count All Processes
+      operationId: countAllProcesses
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Count"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/workflow/upsert/{atoken}':
+    post:
+      tags:
+        - Workflow
+      summary: Create / Update Workflow
+      operationId: upsertWorkflow
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+        - name: entity
+          in: body
+          description: Workflow JSON object
+          required: true
+          schema:
+            $ref: '#/definitions/WorkFlow'
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/workflow/get/{atoken}/{id}':
+    get:
+      tags:
+        - Workflow
+      summary: Retreive Workflow
+      operationId: getWorkflow
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: WorkFlow ID
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/WorkFlow'
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/workflow/delete/{atoken}/{id}':
+    delete:
+      tags:
+        - Workflow
+      summary: Delete Workflow
+      operationId: deleteWorkflow
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: WorkFlow ID
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/workflow/delete/all/{atoken}':
+    delete:
+      tags:
+        - Workflow
+      summary: Delete All Workflows
+      operationId: deleteAllWorkflows
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Success"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
+  '/workflow/count/{atoken}':
+    post:
+      tags:
+        - Workflow
+      summary: Count All Workflows
+      operationId: countAllWorkflows
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: atoken
+          in: path
+          description: Auth token of the logged in user
+          required: true
+          type: string
+        - name: rtype
+          in: query
+          description: One of [DOMAIN, GLOBAL], default is DOMAIN
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema: 
+            $ref: "#/definitions/Count"
+        "417":
+          description: "API Error"
+          schema: 
+            $ref: "#/definitions/ApiError"
 definitions: 
   Login:
     required:
@@ -20772,6 +21104,158 @@ definitions:
           format: uuid
         name:
           type: string
+  Process:
+    type: object
+    required:
+    - id
+    - name
+    - code
+    - output
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      language:
+        type: string
+        enum:
+          - GROOVY
+          - JAVA_SCRIPT
+      code:
+        type: string
+      description:
+        type: string
+      group:
+        type: string
+      domainKey:
+        type: string
+      tags:
+        type: string
+      output:
+        type: object
+      properties:
+        type: object
+  ConditionalProcess:
+    type: object
+    required:
+    - processId
+    - field
+    properties:
+      processId:
+        type: string
+      field:
+        type: string
+      expression:
+        type: string
+  WorkFlowProcess:
+    type: object
+    required:
+    - processId
+    properties:
+      processId:
+        type: string
+      chainedProcessId:
+        type: string
+      onErrorProcessess:
+        type: array
+        items:
+          type: string
+      onCompleteProcesses:
+        type: array
+        items:
+          type: string
+      onNextProcesses:
+        type: array
+        items:
+          type: string
+      conditionalProcesses:
+        type: array
+        items:
+          $ref: "#/definitions/ConditionalProcess"
+  WorkFlow:
+    type: object
+    required:
+    - id
+    - name
+    - processes
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      group:
+        type: string
+      domainKey:
+        type: string
+      description:
+        type: string
+      tags:
+        type: string
+      processes:
+        type: array
+        items:
+          $ref: "#/definitions/WorkFlowProcess"
+      properties:
+        type: object
+  WorkFlowMessage:
+    type: object
+    properties:
+      tyoe:
+        type: integer
+      message:
+        type: string
+  WorkFlowStep:
+    type: object
+    properties:
+      processId:
+        type: string
+      status:
+        type: integer
+      queuedStamp:
+        type: integer
+        format: int16
+      beginStamp:
+        type: integer
+        format: int16
+      endStamp:
+        type: integer
+        format: int16
+      output:
+        type: object
+      messages:
+        type: array
+        items:
+          $ref: "#/definitions/WorkFlowMessage"
+  WorkFlowInstance:
+    type: object
+    required:
+    - workFlowId
+    - instanceId
+    - beginStamp
+    properties:
+      domainKey:
+        type: string
+      workFlowId:
+        type: string
+      instanceId:
+        type: string
+      tags:
+        type: string
+      queuedStamp:
+        type: integer
+        format: int16
+      beginStamp:
+        type: integer
+        format: int16
+      endStamp:
+        type: integer
+        format: int16
+      status:
+        type: integer
+      steps:
+        type: array
+        items:
+          $ref: "#/definitions/WorkFlowStep"
   PushResult:
     type: object
     required:
@@ -21466,6 +21950,12 @@ definitions:
           - 'USER_ASSET_GROUP_MEMBER'
           - 'USER_DEVICE_GROUP_MEMBER'
           - 'USER_GROUP_MEMBER'
+          - 'PROCESS'
+          - 'WORKFLOW'
+          - 'WORKFLOW_INSTANCE'
+          - 'GLOBAL_PROCESS'
+          - 'GLOBAL_WORKFLOW'
+          - 'GLOBAL_WORKFLOW_INSTANCE'
       query:
         type: string
         description: ElasticSearch Query String
@@ -22510,6 +23000,8 @@ definitions:
         type: string
       description:
         type: string
+      marketplace:
+        type: string
   Screen:
     type: object
     properties:
@@ -22551,6 +23043,8 @@ definitions:
       config:
         type: string
       description:
+        type: string
+      market:
         type: string
   Dashboard:
     type: object
