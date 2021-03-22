@@ -21597,42 +21597,23 @@ definitions:
   WorkFlowTrigger:
     type: object
     required:
-    - id
-    - workFlowId
     - trigggerId
     - processId
     properties:
-      id:
-        type: string
-      workFlowId:
-        type: string
       triggerId:
         type: string
       processId:
         type: string
-      name:
-        type: string
-      description:
         type: string
   WorkFlowTriggerGroup:
     type: object
     required:
-    - id
-    - workFlowId
     - trigggerGroupId
     - processId
     properties:
-      id:
-        type: string
-      workFlowId:
-        type: string
       triggerGroupId:
         type: string
       processId:
-        type: string
-      name:
-        type: string
-      description:
         type: string
   WorkFlow:
     type: object
@@ -21655,12 +21636,20 @@ definitions:
         type: string
       cloneObjects:
         type: boolean
+      properties:
+        type: object
       processes:
         type: array
         items:
           $ref: "#/definitions/WorkFlowProcess"
-      properties:
-        type: object
+      triggers:
+        type: array
+        items:
+          $ref: "#/definitions/WorkFlowTrigger"
+      triggerGroups:
+        type: array
+        items:
+          $ref: "#/definitions/WorkFlowTriggerGroup"
   WorkFlowMessage:
     type: object
     properties:
