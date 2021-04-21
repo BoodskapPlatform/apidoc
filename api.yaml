@@ -6,7 +6,7 @@ schemes:
 produces: 
   - "application/json"
 info: 
-  version: "4.0.0-0004"
+  version: "4.0.0-0005"
   title: "Boodskap API"
   description: "Boodskap IoT Platform API"
   termsOfService: "https://boodskap.io/terms-conditions"
@@ -21449,6 +21449,8 @@ definitions:
         type: string
       description:
         type: string
+      properties:
+        type: object
   TriggerGroup:
     type: object
     required:
@@ -21467,6 +21469,26 @@ definitions:
         type: array
         items:
           type: string
+      properties:
+        type: object
+  WorkItem:
+    type: object
+    required:
+    - type
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+        enum:
+          - PROCESS
+          - TRIGGER
+          - TRIGGER_GROUP
+          - WORKFLOW
+          - STOP
+          - TERMINATE
+      group:
+        type: string
   Process:
     type: object
     required:
@@ -21507,42 +21529,8 @@ definitions:
     - field
     - expression
     properties:
-      processId:
-        type: string
-      field:
-        type: string
-      expression:
-        type: string
-      updateSession:
-        type: object
-      updateInput:
-        type: object
-  ConditionalTrigger:
-    type: object
-    required:
-    - triggerId
-    - field
-    - expression
-    properties:
-      triggerId:
-        type: string
-      field:
-        type: string
-      expression:
-        type: string
-      updateSession:
-        type: object
-      updateInput:
-        type: object
-  ConditionalWorkFlow:
-    type: object
-    required:
-    - workFlowId
-    - field
-    - expression
-    properties:
-      workFlowId:
-        type: string
+      workItem:
+        $ref: "#/definitions/WorkItem"
       field:
         type: string
       expression:
@@ -21563,11 +21551,11 @@ definitions:
       onErrorProcessess:
         type: array
         items:
-          type: string
+          $ref: "#/definitions/WorkItem"
       onCompleteProcesses:
         type: array
         items:
-          type: string
+          $ref: "#/definitions/WorkItem"
       onNextProcesses:
         type: array
         items:
@@ -21576,14 +21564,6 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/ConditionalProcess"
-      conditionalTriggers:
-        type: array
-        items:
-          $ref: "#/definitions/ConditionalTrigger"
-      conditionalWorkFlows:
-        type: array
-        items:
-          $ref: "#/definitions/ConditionalWorkFlow"
   WorkFlowProcessInstance:
     type: object
     required:
@@ -21605,6 +21585,8 @@ definitions:
       processId:
         type: string
         type: string
+      properties:
+        type: object
   WorkFlowTriggerGroup:
     type: object
     required:
@@ -21615,6 +21597,8 @@ definitions:
         type: string
       processId:
         type: string
+      properties:
+        type: object
   WorkFlow:
     type: object
     required:
@@ -21638,6 +21622,15 @@ definitions:
         type: boolean
       properties:
         type: object
+      access:
+        type: string
+        enum:
+          - ALL
+          - DOMAIN
+          - ORGANIZATION
+      orgId:
+        type: integer
+        format: int64
       processes:
         type: array
         items:
