@@ -20626,6 +20626,12 @@ paths:
           required: false
           type: integer
           format: int64
+        - name: input
+          in: body
+          description: Input JSON object
+          required: true
+          schema:
+            type: object
       responses:
         '200':
           description: successful operation
@@ -20726,11 +20732,6 @@ paths:
           description: WorkFlow ID
           required: true
           type: string
-        - name: rtype
-          in: query
-          description: One of [DOMAIN, GLOBAL], default is DOMAIN
-          required: false
-          type: string
       responses:
         '200':
           description: successful operation
@@ -20760,11 +20761,6 @@ paths:
           in: path
           description: WorkFlow ID
           required: true
-          type: string
-        - name: rtype
-          in: query
-          description: One of [DOMAIN, GLOBAL], default is DOMAIN
-          required: false
           type: string
       responses:
         '200':
@@ -20800,11 +20796,6 @@ paths:
           in: path
           description: Paused WorkFlow Step ID
           required: true
-          type: string
-        - name: rtype
-          in: query
-          description: One of [DOMAIN, GLOBAL], default is DOMAIN
-          required: false
           type: string
       responses:
         '200':
@@ -22175,6 +22166,20 @@ definitions:
           - TERMINATED
       input:
         type: object
+      queuedCount:
+        type: integer
+      processingCount:
+        type: integer
+      validatingCount:
+        type: integer
+      pausedCount:
+        type: integer
+      cancelledCount:
+        type: integer
+      erroredCount:
+        type: integer
+      finishedCount:
+        type: integer
   PushResult:
     type: object
     required:
